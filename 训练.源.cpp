@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+-----找出数组里两元素和为目标值得两个数字-----
 int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
     int i, j;
     for (i = 0; i < numsSize; i++)
@@ -18,7 +19,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
     *returnSize = 0;
     return NULL;
 }
----------------------
+-----合并两个数组，使其成为正序表（从小到大），求出该数组中位数-----
 double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
     double returndata = 0;
     int* rear = (int *)malloc(sizeof(int) * (nums1Size + nums2Size));
@@ -52,4 +53,7 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
     }
     free(rear);
     return returndata;
-}
+}只能通过部分测试
+样例：[1,2],[3,4]
+     会得出得结果是2.00000.
+    这是错误的。
