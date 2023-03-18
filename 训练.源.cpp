@@ -57,3 +57,6 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
 样例：[1,2],[3,4]
      会得出得结果是2.00000.
     这是错误的。
+找到错误了，第48行，虽然我定义了returndata为双精度类型数据，但是在计算的时候，等号右边的数据为整型导致数据部分丢失，得出的结果也以整型的数据变为双精度。
+---
+revamp.48：returndata=(*(rear + (nums1Size + nums2Size) / 2) + *(rear + ((nums1Size + nums2Size) / 2 )- 1)) / 2.0;
