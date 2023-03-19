@@ -60,3 +60,36 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
 找到错误了，第48行，虽然我定义了returndata为双精度类型数据，但是在计算的时候，等号右边的数据为整型导致数据部分丢失，得出的结果也以整型的数据变为双精度。
 ---
 revamp.48：returndata=(*(rear + (nums1Size + nums2Size) / 2) + *(rear + ((nums1Size + nums2Size) / 2 )- 1)) / 2.0;
+---
+-----盛水容器-----
+int maxArea(int* height, int heightSize) {
+	int returndata = 0, m = heightSize;
+	int temp = 0;//作为辅助
+	int* rear = height;
+	int i = 0, j = 0;
+	for (i = 0; i < m; i++)
+	{
+		for (j = 1; j < m; j++)
+		{
+			int length = j - i;
+			if (*(rear + i) < *(rear + j))
+			{
+				returndata = *(rear + i) * length;
+			}
+			else
+			{
+				returndata = *(rear + j) * length;
+			}
+			if (returndata < temp)
+			{
+				int num = temp;
+				temp = returndata;
+				returndata = num;
+			}
+			temp = returndata;
+		}
+	}
+	return returndata;
+}
+---
+如果是个填空题就随随便便写完了，可惜是编程题，要看时间复杂度，我写的这串太粗暴了，数据一多就直接崩了。
