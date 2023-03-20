@@ -93,3 +93,22 @@ int maxArea(int* height, int heightSize) {
 }
 ---
 如果是个填空题就随随便便写完了，可惜是编程题，要看时间复杂度，我写的这串太粗暴了，数据一多就直接崩了。
+---
+int maxArea(int* height, int heightSize){
+    int m=heightSize-1;
+    int n=0;
+    int smaller=0;
+    int returndata=0;
+    while(n<m)
+    {
+        smaller=height[n]<height[m]?height[n]:height[m];
+        if(returndata<(smaller*(m-n)))
+        returndata=(smaller*(m-n));
+        if(height[n]<height[m])
+        n++;
+        else
+        m--;
+    }
+    return returndata;
+}
+//修改成了双指针法，算是通过提交了。
