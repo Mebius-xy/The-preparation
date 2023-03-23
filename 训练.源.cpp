@@ -171,3 +171,37 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
     return res;
 }                                                                          -------出处：leetcode.cn烟火。
 这题好难，需要较长时间的琢磨。
+---竞赛准备好难---
+	bool isValid(char * s){
+    char *a=(char*)malloc(sizeof(char)*10000);
+    int top=-1;
+    int n=strlen(s);
+    if(n%2!=0)
+    return false;
+    for(int i=0;i<n;i++)
+    {
+        if(s[i]=='('||s[i]=='{'||s[i]=='[')
+        {top++;
+        switch(s[i])
+        {
+            case '(':a[top]=')';break;
+            case '[':a[top]=']';break;
+            case '{':a[top]='}';break;
+        }
+        }
+        else
+        {
+            if(top<0)
+            return false;
+            if(s[i]!=a[top])
+            return false;
+            else
+            top--;
+        }
+    }
+    if(top!=-1)
+    return false;
+    return true;
+}
+初识栈，借助题解慢慢理解
+---还是得靠自己啊，不然什么用都没有，要学习深搜广搜还有动规---
