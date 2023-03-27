@@ -205,3 +205,91 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
 }
 初识栈，借助题解慢慢理解
 ---还是得靠自己啊，不然什么用都没有，要学习深搜广搜还有动规---
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node{
+	int coef;
+	int expon;
+	struct node* next;
+}Node;
+void Attach(int c, int e, node** head)
+{
+	node* p = (node*)malloc(sizeof(node));
+	p->coef = c;
+	p->expon = e;
+	p->next = NULL;
+	(*head)->next = p;
+	*head = p;
+}
+node *creatnode(int num)
+{
+	node* P, *Rear, *t;
+	int c, e;
+	P = (node*)malloc(sizeof(node));
+	P->next = NULL;
+	Rear = P;
+	while (num--)
+	{
+		scanf_s("%d %d", &c, &e);
+		Attach(c, e, &Rear);
+	}
+	t = P;P = P->next;free(t);
+	return P;
+}
+node* deal(node* p1, node* p2)
+{
+	node* front, * rear, * temp;
+	rear = (node*)malloc(sizeof(node));
+	front = rear;
+	while (p1 && p2)//单循环的原因是，链表的指数是由大到小排列好的
+	{
+		if (p1->expon > p2->expon)
+		{
+			Attach(p1->coef, p1->expon, &rear);
+				p1 = p1->next;
+		}
+		else if (p1->expon < p2->expon)
+		{
+			Attach(p2->coef, p2->expon, &rear);
+			p2 = p2->next;
+		}
+		else
+		{
+			if (p1->coef + p2->coef != 0)
+			{
+				Attach(p1->coef + p2->coef, p1->expon, &rear);
+					p1 = p1->next;
+				p2 = p2->next;
+			}
+
+		}
+	}
+	for (;p1;p1->next)
+		Attach(p1->coef, p1->expon, &rear);
+	for (;p2;p2->next)
+		Attach(p2->coef, p2->expon, &rear);
+	temp = front;
+	front = front->next;
+	free(temp);
+	return front;
+}
+void put(node* p)
+{
+	while (p)
+	{
+		printf("%d	%d	", p->coef, p->expon);
+		p = p->next;
+	}
+}
+int main()
+{
+	node* P1, * P2, * PS;
+	printf("enter P1:\n");
+	P1 = creatnode(5);
+	printf("enter P2:\n");
+	P2 = creatnode(4);
+	printf("answer:\n");
+	PS=deal(P1,P2);
+	put(PS);
+	return 0;
+}
