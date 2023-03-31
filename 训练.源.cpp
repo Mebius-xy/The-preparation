@@ -293,3 +293,18 @@ int main()
 	put(PS);
 	return 0;
 }
+ void dealtree(struct TreeNode* root,int *a,int *Size)
+ {
+     if(root)
+     {
+         dealtree(root->left,a,Size);
+         a[(*Size)++]=root->val;
+         dealtree(root->right,a,Size);
+     }
+ }
+int* inorderTraversal(struct TreeNode* root, int* returnSize){
+    int *res=(int*)malloc(sizeof(int)*100);
+    *returnSize=0;
+    dealtree(root,res,returnSize);
+    return res;
+}
